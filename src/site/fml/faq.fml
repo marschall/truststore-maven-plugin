@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faqs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/FML/1.0.1"
+  xsi:schemaLocation="http://maven.apache.org/FML/1.0.1 http://maven.apache.org/xsd/fml-1.0.1.xsd"
+  id="FAQ" title="Frequently Asked Questions">
+  <part id="General">
+    <faq id="supported-keystore-types">
+      <question>Why keystore types are supported?</question>
+      <answer>
+        <p>
+          Only PKCS12 is supported.
+        </p>
+      </answer>
+    </faq>
+    <faq id="jks-not-supported">
+      <question>Why is JKS not supported?</question>
+      <answer>
+        <p>
+          JKS is legacy and PKS12 is the default checkout <a href="http://openjdk.java.net/jeps/229">JEP 229: Create PKCS12 Keystores by Default</a>.
+        </p>
+      </answer>
+    </faq>
+    <faq id="default-password">
+      <question>What is the default truststore password?</question>
+      <answer>
+        <p>
+          The default truststore password is changeit.
+        </p>
+      </answer>
+    </faq>
+  </part>
+</faqs>
