@@ -19,17 +19,36 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
+/**
+ * Generates a PKCS12 trustore from a collection of certificates located in a folder.
+ */
 @Mojo(
-        name = "pkcs12",
-        threadSafe = true)
+  name = "pkcs12",
+  threadSafe = true
+)
 public class TruststoreMojo extends AbstractMojo {
 
+  /**
+   * The directory in which the certificates to add to the truststore are located.
+   */
   @Parameter(defaultValue = "${project.basedir}/src/main/certificates")
   private File sourceDirectory;
 
-  @Parameter(defaultValue = "${project.build.finalName}")
-  private File finalName;
+  /**
+   * Directory containing the generated JAR.
+   */
+  @Parameter(defaultValue = "${project.build.directory}", required = true)
+  private File outputDirectory;
 
+  /**
+   * Name of the generated JAR.
+   */
+  @Parameter(defaultValue = "${project.build.finalName}", readonly = true)
+  private String finalName;
+
+  /**
+   * The password to generate the truststore integrity check.
+   */
   @Parameter(defaultValue = "changeit", property = "truststore.password")
   private String password;
 
@@ -59,13 +78,26 @@ public class TruststoreMojo extends AbstractMojo {
     this.saveKeystore(keyStore);
   }
 
-  private void saveKeystore(KeyStore keyStore) throws MojoFailureException {
-    this.getLog().debug("saving keystore to: " + this.finalName);
-    try (FileOutputStream fileOutputstream = new FileOutputStream(this.finalName);
+  private void saveKeystore(KeyStore keyStore) throws MojoFailureException, MojoExecutionException {
+    if (!this.outputDirectory.exists()) {
+      if (!this.outputDirectory.mkdirs()) {
+        throw new MojoExecutionException("could not create folder: " + this.outputDirectory);
+      }
+    }
+
+    File keyStoreFile = new File(this.outputDirectory, this.finalName + ".p12");
+    if (keyStoreFile.exists()) {
+      if (!keyStoreFile.delete()) {
+        throw new MojoExecutionException("could not delete existing file: " + keyStoreFile);
+      }
+    }
+
+    this.getLog().debug("saving keystore to: " + keyStoreFile);
+    try (FileOutputStream fileOutputstream = new FileOutputStream(keyStoreFile);
          BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputstream)) {
       keyStore.store(bufferedOutputStream, this.password.toCharArray());
     } catch (IOException | GeneralSecurityException e) {
-      throw new MojoFailureException("could not save keystore: " + this.finalName, e);
+      throw new MojoFailureException("could not save keystore: " + keyStoreFile, e);
     }
   }
 
