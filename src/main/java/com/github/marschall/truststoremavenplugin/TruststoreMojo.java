@@ -24,13 +24,14 @@ import org.apache.maven.plugins.annotations.Parameter;
         threadSafe = true)
 public class TruststoreMojo extends AbstractMojo {
 
-//  private File certificateDirectory;
   @Parameter(defaultValue = "${project.basedir}/src/main/certificates")
-  private final File sourceDirectory = new File("src/test/resources");
+  private File sourceDirectory;
 
-//  private File certificateDirectory;
   @Parameter(defaultValue = "${project.build.finalName}")
-  private final File finalName = new File("target/keystore.p12");
+  private File finalName;
+
+  @Parameter(defaultValue = "changeit", property = "truststore.password")
+  private String password;
 
   @Override
   public void execute()
@@ -62,8 +63,7 @@ public class TruststoreMojo extends AbstractMojo {
     this.getLog().debug("saving keystore to: " + this.finalName);
     try (FileOutputStream fileOutputstream = new FileOutputStream(this.finalName);
          BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputstream)) {
-      char[] password = new char[0];
-      keyStore.store(bufferedOutputStream, password);
+      keyStore.store(bufferedOutputStream, this.password.toCharArray());
     } catch (IOException | GeneralSecurityException e) {
       throw new MojoFailureException("could not save keystore: " + this.finalName, e);
     }
@@ -133,10 +133,6 @@ public class TruststoreMojo extends AbstractMojo {
     if (!this.sourceDirectory.isDirectory()) {
       throw new MojoFailureException("certificate directory: " + this.sourceDirectory + " is not a directory");
     }
-  }
-
-  public static void main(String[] args) throws MojoExecutionException, MojoFailureException {
-    new TruststoreMojo().execute();
   }
 
 }
