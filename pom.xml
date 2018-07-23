@@ -330,19 +330,6 @@
                     <ignore />
                   </action>
                 </pluginExecution>
-                <pluginExecution>
-                  <pluginExecutionFilter>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-toolchains-plugin</artifactId>
-                    <versionRange>[1.0,)</versionRange>
-                    <goals>
-                      <goal>toolchain</goal>
-                    </goals>
-                  </pluginExecutionFilter>
-                  <action>
-                    <ignore />
-                  </action>
-                </pluginExecution>
               </pluginExecutions>
             </lifecycleMappingMetadata>
           </configuration>
@@ -382,29 +369,6 @@
         </plugins>
       </build>
     </profile>
-    <profile>
-      <id>travis</id>
-      <activation>
-        <!-- https://github.com/travis-ci/travis-ci/issues/2727 -->
-        <!-- http://docs.travis-ci.com/user/ci-environment/#Environment-variables -->
-        <property>
-          <name>env.TRAVIS</name>
-          <value>true</value>
-        </property>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <artifactId>maven-toolchains-plugin</artifactId>
-            <executions>
-              <execution>
-                <phase>none</phase>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
   </profiles>
 
   <properties>
@@ -413,7 +377,7 @@
     <maven.version>3.5.2</maven.version>
     <maven.plugin.version>3.5.2</maven.plugin.version>
     <java.version>1.8</java.version>
-    <tikari.version>2.9.1</tikari.version>
+    <tikari.version>2.9.2</tikari.version>
   </properties>
 
 </project>
