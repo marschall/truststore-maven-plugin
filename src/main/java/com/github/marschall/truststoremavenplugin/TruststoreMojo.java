@@ -37,7 +37,7 @@ public class TruststoreMojo extends AbstractMojo {
   /**
    * Directory containing the generated JAR.
    */
-  @Parameter(defaultValue = "${project.build.directory}", required = true)
+  @Parameter(defaultValue = "${project.build.directory}", readonly = true)
   private File outputDirectory;
 
   /**
