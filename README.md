@@ -3,7 +3,10 @@ Trustore Maven Plugin [![Build Status](https://travis-ci.org/marschall/truststor
 
 The truststore Maven plugin gives you an easy way to manage Java truststores.
 
-The plugins allows you to manage truststores by having a project under source control that contains all your trusted certificates. A Maven build a produces a PKCS12 artifact that can be deployed to a Maven repository.
+The plugins allows you to manage truststores by having a project under source control that contains all your trusted certificates. A Maven build a produces a PKCS12 artifact that can be deployed to a Maven repository. Since the project is under source control a release is also tagged making to easy to know what is deployed in production.
+
+Usage
+-----
 
 Simply create a project with packaging `pkcs12`
 
@@ -36,5 +39,10 @@ Simply create a project with packaging `pkcs12`
 and add your certificates under `src/main/certificates`. The filename minus the extension will be the alias of the certificate.
 
 
+Good to Know
+------------
+
 The plugin only sports PKCS12 truststores and does not support legacy JKS truststores.
+
+The default truststore password is "changeit".
 
