@@ -1,4 +1,4 @@
-Trustore Maven Plugin [![Build Status](https://travis-ci.org/marschall/truststore-maven-plugin.svg?branch=master)](https://travis-ci.org/marschall/truststore-maven-plugin)
+Truststore Maven Plugin [![Build Status](https://travis-ci.org/marschall/truststore-maven-plugin.svg?branch=master)](https://travis-ci.org/marschall/truststore-maven-plugin)
 =====================
 
 The truststore Maven plugin gives you an easy way to manage Java truststores.

@@ -20,7 +20,7 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
 /**
- * Generates a PKCS12 trustore from a collection of certificates located in a folder.
+ * Generates a PKCS12 truststore from a collection of certificates located in a folder.
  */
 @Mojo(
   name = "pkcs12",
