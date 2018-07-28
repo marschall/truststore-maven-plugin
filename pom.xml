@@ -30,7 +30,7 @@
   <licenses>
     <license>
       <name>MIT</name>
-      <url>https://opensource.org/licenses/MIT</url>
+      <url>https://raw.githubusercontent.com/marschall/truststore-maven-plugin/master/src/main/resources/LICENSE</url>
       <distribution>repo</distribution>
     </license>
   </licenses>
