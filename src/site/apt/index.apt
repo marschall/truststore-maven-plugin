@@ -8,13 +8,13 @@
 
 truststore Maven Plugin
 
- The truststore Maven Plugin creates a PKCS12 truststore from the certificates in a project.
+ The truststore Maven Plugin creates a PKCS12 truststore from certificate files in a project.
 
  When no configuration values are set, the plugin sets default values.
 
 * Goals Overview
 
-   The jdeps Plugin has only one goal:
+   The truststore Plugin has only one goal:
 
    * {{{./pkcs12-mojo.html}truststore:pkcs12}} creates a PKCS12 truststore from the certificates in the source folder.
 
@@ -22,7 +22,7 @@ truststore Maven Plugin
 
 * Usage
 
-  General instructions on how to use the truststore Plugin can be found on the {{{./plugin-info.html#Usage}usage page}}.
+  General instructions on how to use the truststore Maven Plugin can be found on the {{{./usage.html}usage page}}.
 
   In case you still have questions regarding the plugin's usage, please have a look at the {{{./faq.html}FAQ}}.
 
