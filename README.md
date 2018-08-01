@@ -1,4 +1,4 @@
-Truststore Maven Plugin [![Build Status](https://travis-ci.org/marschall/truststore-maven-plugin.svg?branch=master)](https://travis-ci.org/marschall/truststore-maven-plugin)
+Truststore Maven Plugin (https://maven-badges.herokuapp.com/maven-central/com.github.marschall/truststore-maven-plugin/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.marschall/truststore-maven-plugin) [![Build Status](https://travis-ci.org/marschall/truststore-maven-plugin.svg?branch=master)](https://travis-ci.org/marschall/truststore-maven-plugin)
 =====================
 
 The truststore Maven plugin gives you an easy way to manage Java truststores.
@@ -27,7 +27,7 @@ Simply create a project with packaging `pkcs12`
       <plugin>
         <groupId>com.github.marschall</groupId>
         <artifactId>truststore-maven-plugin</artifactId>
-        <version>0.1.0</version>
+        <version>0.1.1</version>
         <extensions>true</extensions>
       </plugin>
     </plugins>
@@ -39,10 +39,5 @@ Simply create a project with packaging `pkcs12`
 and add your certificates under `src/main/certificates`. The filename minus the extension will be the alias of the certificate.
 
 
-Good to Know
-------------
-
-The plugin only sports PKCS12 truststores and does not support legacy JKS truststores.
-
-The default truststore password is "changeit".
+For more information check out the generated [plugin page](https://marschall.github.io/truststore-maven-plugin/).
 

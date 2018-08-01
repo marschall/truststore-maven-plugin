@@ -10,6 +10,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.security.KeyStore;
+import java.security.KeyStore.TrustedCertificateEntry;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -71,7 +72,9 @@ public class TruststoreMojoTest {
     }
 
     assertEquals("keystore size", 1, keyStore.size());
-    assertNotNull(keyStore.getCertificate("DigiCertHighAssuranceEVRootCA"));
+    String alias = "DigiCertHighAssuranceEVRootCA";
+    assertTrue(keyStore.getEntry(alias, null) instanceof TrustedCertificateEntry);
+    assertNotNull(keyStore.getCertificate(alias));
   }
 
 }
