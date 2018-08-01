@@ -1,4 +1,4 @@
-Truststore Maven Plugin (https://maven-badges.herokuapp.com/maven-central/com.github.marschall/truststore-maven-plugin/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.marschall/truststore-maven-plugin) [![Build Status](https://travis-ci.org/marschall/truststore-maven-plugin.svg?branch=master)](https://travis-ci.org/marschall/truststore-maven-plugin)
+Truststore Maven Plugin [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.marschall/truststore-maven-plugin/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.marschall/truststore-maven-plugin) [![Build Status](https://travis-ci.org/marschall/truststore-maven-plugin.svg?branch=master)](https://travis-ci.org/marschall/truststore-maven-plugin)
 =====================
 
 The truststore Maven plugin gives you an easy way to manage Java truststores.
