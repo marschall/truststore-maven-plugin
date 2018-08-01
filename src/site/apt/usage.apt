@@ -1,0 +1,54 @@
+ ------
+ Usage
+ ------
+ Philippe Marschall
+ ------
+ 2018-07-28
+ ------
+
+Usage
+
+  Some brief examples on how to use this plugin.
+
+* How to build a truststore
+
+  When you want to create a truststore with Maven, you first have to create a <<<pom.xml>>>-file with at least the following content:
+
++----------+
+<project>
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.mycompany.project</groupId>
+  <artifactId>project-truststore</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pkcs12</packaging>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.github.marschall</groupId>
+        <artifactId>truststore-maven-plugin</artifactId>
+        <version>0.1.0</version>
+        <extensions>true</extensions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
++----------+
+
+  Apart from the above you will normally want some real certificates files which should be located within
+  <<<src/main/certificates>>>. The file name (minus the extension) will end up being the alias of the
+  certificate within the truststore.
+  Now we can create a truststore-file by using the command below:
+
++-----------------+
+mvn package
++-----------------+
+
+  The 'package' phase is always responsible for bundling all the files in the artifact, in this case a truststore-file.
+
+  In your project's <<<target>>> directory you'll see the generated truststore file which is named like:
+  'project-truststore-1.0-SNAPSHOT.p12'. The resulting 'p12' file contains the certificate
+  files from <<<src/main/certificates>>>>.
+
+  For full documentation, click {{{./plugin-info.html}here}}.

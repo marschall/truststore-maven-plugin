@@ -16,7 +16,7 @@
       <question>Why is JKS not supported?</question>
       <answer>
         <p>
-          JKS is legacy and PKS12 is the default checkout <a href="http://openjdk.java.net/jeps/229">JEP 229: Create PKCS12 Keystores by Default</a>.
+          JKS is legacy and PKS12 is the default. Checkout <a href="http://openjdk.java.net/jeps/229">JEP 229: Create PKCS12 Keystores by Default</a> for more information.
         </p>
       </answer>
     </faq>
@@ -24,7 +24,15 @@
       <question>What is the default truststore password?</question>
       <answer>
         <p>
-          The default truststore password is changeit.
+          The default truststore password is "changeit" (without the quotes).
+        </p>
+      </answer>
+    </faq>
+    <faq id="why-password">
+      <question>Why is a password required?</question>
+      <answer>
+        <p>
+          Most tools expect a truststore password.
         </p>
       </answer>
     </faq>
