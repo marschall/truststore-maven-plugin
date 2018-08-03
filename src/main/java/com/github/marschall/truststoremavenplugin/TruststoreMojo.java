@@ -16,8 +16,10 @@ import java.security.cert.CertificateFactory;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.project.MavenProject;
 
 /**
  * Generates a PKCS12 truststore from a collection of certificates located in a folder.
@@ -52,6 +54,9 @@ public class TruststoreMojo extends AbstractMojo {
   @Parameter(defaultValue = "changeit", property = "truststore.password")
   private String password;
 
+  @Component
+  private MavenProject project;
+
   @Override
   public void execute()
           throws MojoExecutionException, MojoFailureException {
@@ -75,10 +80,11 @@ public class TruststoreMojo extends AbstractMojo {
       this.getLog().warn("keystore is empty");
     }
 
-    this.saveKeystore(keyStore);
+    File keyStoreFile = this.saveKeystore(keyStore);
+    this.project.getArtifact().setFile(keyStoreFile);
   }
 
-  private void saveKeystore(KeyStore keyStore) throws MojoFailureException, MojoExecutionException {
+  private File saveKeystore(KeyStore keyStore) throws MojoFailureException, MojoExecutionException {
     if (!this.outputDirectory.exists()) {
       if (!this.outputDirectory.mkdirs()) {
         throw new MojoExecutionException("could not create folder: " + this.outputDirectory);
@@ -99,6 +105,7 @@ public class TruststoreMojo extends AbstractMojo {
     } catch (IOException | GeneralSecurityException e) {
       throw new MojoFailureException("could not save keystore: " + keyStoreFile, e);
     }
+    return keyStoreFile;
   }
 
   private void addCertificate(KeyStore keyStore, CertificateFactory certificateFactory, File certificateFile)
