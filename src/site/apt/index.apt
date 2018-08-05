@@ -24,6 +24,8 @@ truststore Maven Plugin
 
   General instructions on how to use the truststore Maven Plugin can be found on the {{{./usage.html}usage page}}.
 
+  An example on how to use the truststore Maven Plugin can be found in the {{{https://github.com/marschall/truststore-maven-plugin-examples}truststore-maven-plugin-examples}} repository.
+
   In case you still have questions regarding the plugin's usage, please have a look at the {{{./faq.html}FAQ}}.
 
   If you feel like the plugin is missing a feature or has a defect, you can fill a feature request or bug report in our
