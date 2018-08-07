@@ -84,6 +84,7 @@ public class TruststoreMojo extends AbstractMojo {
 
     File keyStoreFile = this.saveKeystore(keyStore);
     this.project.getArtifact().setFile(keyStoreFile);
+    this.project.addCompileSourceRoot(this.sourceDirectory.getAbsolutePath());
   }
 
   private File saveKeystore(KeyStore keyStore) throws MojoFailureException, MojoExecutionException {
