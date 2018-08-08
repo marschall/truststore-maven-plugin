@@ -28,7 +28,7 @@ public class TruststoreUnarchiver {
     // writer.println(X509Factory.BEGIN_CERT);
     outputStream.write("-----BEGIN CERTIFICATE-----\n".getBytes(StandardCharsets.US_ASCII));
     Encoder encoder = Base64.getEncoder();
-    encoder.wrap(outputStream).write(certificate.getEncoded());
+    outputStream.write(encoder.encode(certificate.getEncoded()));
     outputStream.write("-----END CERTIFICATE-----".getBytes(StandardCharsets.US_ASCII));
     //writer.println(X509Factory.END_CERT);
   }
