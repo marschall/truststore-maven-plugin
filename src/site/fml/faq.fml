@@ -56,5 +56,14 @@
         </p>
       </answer>
     </faq>
+    <faq id="source-jar">
+      <question>Can I create a source JAR containing the certificates?</question>
+      <answer>
+        <p>
+          Absolutely you can use the maven-source-plugin to create a source JAR containing the certificates.
+          It should work out of the box without a need to specify a source folder as long as it runs after this plugin.
+        </p>
+      </answer>
+    </faq>
   </part>
 </faqs>
