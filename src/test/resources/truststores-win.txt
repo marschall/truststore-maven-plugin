@@ -1,0 +1,9 @@
+CaseExactJKS
+DKS
+JCEKS
+JKS
+PKCS12
+Windows-MY
+Windows-ROOT
+
+https://stackoverflow.com/questions/49176390/set-jre-to-use-windows-trust-store-specifically-the-users-trust-store
