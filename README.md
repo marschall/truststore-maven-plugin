@@ -27,7 +27,7 @@ Simply create a project with packaging `pkcs12`
       <plugin>
         <groupId>com.github.marschall</groupId>
         <artifactId>truststore-maven-plugin</artifactId>
-        <version>0.1.2</version>
+        <version>0.1.4</version>
         <extensions>true</extensions>
       </plugin>
     </plugins>
