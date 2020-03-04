@@ -19,7 +19,8 @@ public class TruststoreUnarchiver {
       String alias = aliases.nextElement();
       if (keyStore.isCertificateEntry(alias)) {
         OutputStream outputStream = null;
-        unarchive(alias, keyStore.getCertificate(alias), outputStream);
+        Certificate certificate = keyStore.getCertificate(alias);
+        unarchive(alias, certificate, outputStream);
       }
     }
   }
