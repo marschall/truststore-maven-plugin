@@ -50,6 +50,16 @@ public class TruststoreMojoTest {
     this.assertOutput(targetFolder);
   }
 
+  @Test
+  public void testExpiredCertificate() throws Exception {
+    File basedir = this.resources.getBasedir("expired-certificate");
+    MavenExecution execution = this.mavenRuntime.forProject(basedir);
+
+    MavenExecutionResult result = execution.execute("clean", "package");
+    result.assertLogText("Expired certificate badssl-com.pem");
+    result.assertLogText("BUILD FAILURE");
+  }
+
   private void assertOutput(File targetFolder) throws IOException, GeneralSecurityException {
     boolean found = false;
     File[] targetFiles = targetFolder.listFiles();

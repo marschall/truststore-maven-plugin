@@ -11,7 +11,10 @@ import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
+import java.security.cert.CertificateExpiredException;
 import java.security.cert.CertificateFactory;
+import java.security.cert.CertificateNotYetValidException;
+import java.security.cert.X509Certificate;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -113,6 +116,7 @@ public class TruststoreMojo extends AbstractMojo {
   private void addCertificate(KeyStore keyStore, CertificateFactory certificateFactory, File certificateFile)
           throws MojoExecutionException, MojoFailureException {
     Certificate certificate = this.loadCertificateFromFile(certificateFactory, certificateFile);
+    this.validateCertificate(certificate, certificateFile);
 
     String alias = this.getAlias(certificateFile);
     this.getLog().debug("adding certificate: " + certificateFile + " with alias: " + alias);
@@ -121,6 +125,22 @@ public class TruststoreMojo extends AbstractMojo {
     } catch (KeyStoreException e) {
       throw new MojoFailureException("could not add certificate: " + certificateFile, e);
     }
+  }
+
+  private void validateCertificate(Certificate certificate, File certificateFile) throws MojoFailureException {
+    if (certificate instanceof X509Certificate) {
+      X509Certificate x509Certificate = (X509Certificate) certificate;
+      try {
+        x509Certificate.checkValidity();
+      } catch (CertificateExpiredException e) {
+        String message = "Expired certificate " + certificateFile.getName();
+        this.getLog().error(message);
+        throw new MojoFailureException(message, e);
+      } catch (CertificateNotYetValidException e) {
+        this.getLog().info("Not yet valid certificate " + certificateFile.getName());
+      }
+    }
+
   }
 
   private String getAlias(File certificateFile) {
