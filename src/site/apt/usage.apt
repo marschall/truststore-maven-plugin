@@ -28,7 +28,7 @@ Usage
       <plugin>
         <groupId>com.github.marschall</groupId>
         <artifactId>truststore-maven-plugin</artifactId>
-        <version>0.1.4</version>
+        <version>0.2.0</version>
         <extensions>true</extensions>
       </plugin>
     </plugins>

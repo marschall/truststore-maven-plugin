@@ -37,7 +37,7 @@
       </answer>
     </faq>
     <faq id="attaching">
-      <question>Why attaching not supported?</question>
+      <question>Why is attaching not supported?</question>
       <answer>
         <p>
           Right now the pulgin does not support attaching a PKCS12 to an existing module, instead a new module has to be created.
@@ -51,7 +51,7 @@
         <p>
           A dependency on a PKCS12 module can be consumed like any other Maven dependency.
           In particular it can be consumed by the Maven Assembly plugin.
-          Check out [this example](https://github.com/marschall/truststore-maven-plugin-examples/blob/master/assembly/src/assembly/src.xml)
+          Check out <a href="https://github.com/marschall/truststore-maven-plugin-examples/blob/master/assembly/src/assembly/src.xml">this example</a>
           of an assembly descriptor referencing a PKCS12 module.
         </p>
       </answer>
