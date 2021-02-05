@@ -1,26 +1,29 @@
 package com.github.marschall.truststoremavenplugin;
 
-import static org.apache.maven.plugins.annotations.LifecyclePhase.PACKAGE;
+import static org.apache.maven.plugins.annotations.LifecyclePhase.GENERATE_RESOURCES;
 
 import java.io.File;
 
+import org.apache.maven.model.Resource;
 import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugin.MojoExecution;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 
 /**
  * Generates a PKCS12 truststore from a collection of certificates located in a folder.
- * Supports the "pkcs12" packaging of a project.
+ * Runs during a normal Maven build.
  */
 @Mojo(
-  name = "pkcs12",
+  name = "pkcs12-inplace",
   threadSafe = true,
-  defaultPhase = PACKAGE
+  defaultPhase = GENERATE_RESOURCES
 )
-public class Pkcs12Mojo extends AbstractMojo {
+public class Pkcs12InplaceMojo extends AbstractMojo {
 
   /**
    * The directory in which the certificates to add to the truststore are located.
@@ -31,7 +34,7 @@ public class Pkcs12Mojo extends AbstractMojo {
   /**
    * Directory containing the generated truststore.
    */
-  @Parameter(defaultValue = "${project.build.directory}", readonly = true)
+  @Parameter(defaultValue = "${project.directory}/generated-truststore", readonly = true)
   private File outputDirectory;
 
   /**
@@ -46,6 +49,9 @@ public class Pkcs12Mojo extends AbstractMojo {
   @Parameter(defaultValue = "changeit", property = "truststore.password")
   private String password;
 
+  @Component
+  private MojoExecution execution;
+
   @Parameter(defaultValue = "${project}", readonly = true)
   private MavenProject project;
 
@@ -57,8 +63,20 @@ public class Pkcs12Mojo extends AbstractMojo {
     truststoreFactory.addCertificatesIn(this.sourceDirectory);
     File truststoreFile = truststoreFactory.saveKeystore(this.outputDirectory, this.finalName, this.password);
 
-    this.project.getArtifact().setFile(truststoreFile);
-    this.project.addCompileSourceRoot(this.sourceDirectory.getAbsolutePath());
+    String phase = this.execution.getLifecyclePhase();
+
+    Resource resource = new Resource();
+    resource.setDirectory(this.outputDirectory.getAbsolutePath());
+    resource.setTargetPath(phase);
+    resource.setTargetPath(truststoreFile.getName());
+
+    if ("generate-resources".equals(phase)) {
+      this.project.addResource(resource);
+    } else if ("generate-test-sources".equals(phase)) {
+      this.project.addTestResource(resource);
+    } else {
+      this.getLog().warn("unsupported phase: " + phase + " not attaching resource");
+    }
   }
 
   private void validate() throws MojoFailureException {
