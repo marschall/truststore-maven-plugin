@@ -11,7 +11,7 @@ import java.util.Base64;
 import java.util.Base64.Encoder;
 import java.util.Enumeration;
 
-public class TruststoreUnarchiver {
+public class TruststoreUnarchiver /* implements org.codehaus.plexus.archiver.UnArchiver */ {
 
   private void unarchive(KeyStore keyStore) throws GeneralSecurityException, IOException {
     Enumeration<String> aliases = keyStore.aliases();
@@ -20,7 +20,7 @@ public class TruststoreUnarchiver {
       if (keyStore.isCertificateEntry(alias)) {
         OutputStream outputStream = null;
         Certificate certificate = keyStore.getCertificate(alias);
-        unarchive(alias, certificate, outputStream);
+        this.unarchive(alias, certificate, outputStream);
       }
     }
   }

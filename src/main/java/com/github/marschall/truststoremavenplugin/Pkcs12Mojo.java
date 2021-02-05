@@ -1,20 +1,6 @@
 package com.github.marschall.truststoremavenplugin;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.security.GeneralSecurityException;
-import java.security.KeyStore;
-import java.security.KeyStoreException;
-import java.security.cert.Certificate;
-import java.security.cert.CertificateException;
-import java.security.cert.CertificateExpiredException;
-import java.security.cert.CertificateFactory;
-import java.security.cert.CertificateNotYetValidException;
-import java.security.cert.X509Certificate;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -62,129 +48,15 @@ public class Pkcs12Mojo extends AbstractMojo {
   private MavenProject project;
 
   @Override
-  public void execute()
-          throws MojoExecutionException, MojoFailureException {
+  public void execute() throws MojoExecutionException, MojoFailureException {
     this.validate();
-    KeyStore keyStore = this.newEmptyKeystore();
 
-    this.getLog().info("adding certificates in directory: " + this.sourceDirectory);
+    TruststoreFactory truststoreFactory = new TruststoreFactory(this.getLog());
+    truststoreFactory.addCertificatesIn(this.sourceDirectory);
+    File keyStoreFile = truststoreFactory.saveKeystore(this.outputDirectory, this.finalName, this.password);
 
-    CertificateFactory certificateFactory = this.newCertificateFactory();
-
-    boolean empty = true;
-    for (File certificateFile : this.sourceDirectory.listFiles()) {
-      if (certificateFile.isDirectory()) {
-        this.getLog().warn("skipping directory: " + certificateFile);
-        continue;
-      }
-      this.addCertificate(keyStore, certificateFactory, certificateFile);
-      empty = false;
-    }
-    if (empty) {
-      this.getLog().warn("keystore is empty");
-    }
-
-    File keyStoreFile = this.saveKeystore(keyStore);
     this.project.getArtifact().setFile(keyStoreFile);
     this.project.addCompileSourceRoot(this.sourceDirectory.getAbsolutePath());
-  }
-
-  private File saveKeystore(KeyStore keyStore) throws MojoFailureException, MojoExecutionException {
-    if (!this.outputDirectory.exists()) {
-      if (!this.outputDirectory.mkdirs()) {
-        throw new MojoExecutionException("could not create folder: " + this.outputDirectory);
-      }
-    }
-
-    File keyStoreFile = new File(this.outputDirectory, this.finalName + ".p12");
-    if (keyStoreFile.exists()) {
-      if (!keyStoreFile.delete()) {
-        throw new MojoExecutionException("could not delete existing file: " + keyStoreFile);
-      }
-    }
-
-    this.getLog().debug("saving keystore to: " + keyStoreFile);
-    try (FileOutputStream fileOutputstream = new FileOutputStream(keyStoreFile);
-         BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputstream)) {
-      keyStore.store(bufferedOutputStream, this.password.toCharArray());
-    } catch (IOException | GeneralSecurityException e) {
-      throw new MojoFailureException("could not save keystore: " + keyStoreFile, e);
-    }
-    return keyStoreFile;
-  }
-
-  private void addCertificate(KeyStore keyStore, CertificateFactory certificateFactory, File certificateFile)
-          throws MojoExecutionException, MojoFailureException {
-    Certificate certificate = this.loadCertificateFromFile(certificateFactory, certificateFile);
-    this.validateCertificate(certificate, certificateFile);
-
-    String alias = this.getAlias(certificateFile);
-    this.getLog().debug("adding certificate: " + certificateFile + " with alias: " + alias);
-    try {
-      keyStore.setCertificateEntry(alias, certificate);
-    } catch (KeyStoreException e) {
-      throw new MojoFailureException("could not add certificate: " + certificateFile, e);
-    }
-  }
-
-  private void validateCertificate(Certificate certificate, File certificateFile) throws MojoFailureException {
-    if (certificate instanceof X509Certificate) {
-      X509Certificate x509Certificate = (X509Certificate) certificate;
-      try {
-        x509Certificate.checkValidity();
-      } catch (CertificateExpiredException e) {
-        String message = "Expired certificate " + certificateFile.getName();
-        this.getLog().error(message);
-        throw new MojoFailureException(message, e);
-      } catch (CertificateNotYetValidException e) {
-        this.getLog().info("Not yet valid certificate " + certificateFile.getName());
-      }
-    }
-
-  }
-
-  private String getAlias(File certificateFile) {
-    String fileName = certificateFile.getName();
-    int lastDotIndex = fileName.lastIndexOf('.');
-    if (lastDotIndex == -1) {
-      return fileName;
-    }
-    return fileName.substring(0, lastDotIndex);
-  }
-
-  private Certificate loadCertificateFromFile(CertificateFactory certificateFactory, File certificateFile)
-          throws MojoExecutionException {
-    try (FileInputStream fileInputStream = new FileInputStream(certificateFile);
-         BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream)) {
-      return certificateFactory.generateCertificate(bufferedInputStream);
-    } catch (IOException | CertificateException e) {
-      throw new MojoExecutionException("could not load certificate from file: " + certificateFile, e);
-    }
-  }
-
-  private CertificateFactory newCertificateFactory()
-          throws MojoFailureException {
-    try {
-      return CertificateFactory.getInstance("X.509");
-    } catch (CertificateException e) {
-      throw new MojoFailureException("no X509 factory found", e);
-    }
-  }
-
-  private KeyStore newEmptyKeystore()
-          throws MojoExecutionException {
-    KeyStore keyStore;
-    try {
-      keyStore = KeyStore.getInstance("PKCS12");
-    } catch (KeyStoreException e) {
-      throw new MojoExecutionException("PKCS12 not supported", e);
-    }
-    try {
-      keyStore.load(null, null);
-    } catch (GeneralSecurityException | IOException e) {
-      throw new MojoExecutionException("could not initialize keystore", e);
-    }
-    return keyStore;
   }
 
   private void validate() throws MojoFailureException {
