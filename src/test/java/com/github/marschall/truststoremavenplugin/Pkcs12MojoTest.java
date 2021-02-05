@@ -26,14 +26,14 @@ import io.takari.maven.testing.executor.junit.MavenJUnitTestRunner;
 
 @RunWith(MavenJUnitTestRunner.class)
 @MavenVersions("3.6.3")
-public class TruststoreMojoTest {
+public class Pkcs12MojoTest {
 
   @Rule
   public final TestResources resources = new TestResources();
 
   private final MavenRuntime mavenRuntime;
 
-  public TruststoreMojoTest(MavenRuntimeBuilder builder) throws Exception {
+  public Pkcs12MojoTest(MavenRuntimeBuilder builder) throws Exception {
     this.mavenRuntime = builder.build();
   }
 

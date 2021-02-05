@@ -32,7 +32,7 @@ import org.apache.maven.project.MavenProject;
   threadSafe = true,
   defaultPhase = LifecyclePhase.PACKAGE
 )
-public class TruststoreMojo extends AbstractMojo {
+public class Pkcs12Mojo extends AbstractMojo {
 
   /**
    * The directory in which the certificates to add to the truststore are located.
@@ -49,7 +49,7 @@ public class TruststoreMojo extends AbstractMojo {
   /**
    * Name of the generated JAR.
    */
-  @Parameter(defaultValue = "${project.build.finalName}", readonly = true)
+  @Parameter(defaultValue = "${project.build.finalName}")
   private String finalName;
 
   /**
