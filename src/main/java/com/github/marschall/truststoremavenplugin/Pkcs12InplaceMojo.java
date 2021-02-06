@@ -34,7 +34,7 @@ public class Pkcs12InplaceMojo extends AbstractMojo {
   /**
    * Directory containing the generated truststore.
    */
-  @Parameter(defaultValue = "${project.directory}/generated-truststore", readonly = true)
+  @Parameter(defaultValue = "${project.build.directory}/generated-truststores", readonly = true)
   private File outputDirectory;
 
   /**
@@ -63,13 +63,12 @@ public class Pkcs12InplaceMojo extends AbstractMojo {
     truststoreFactory.addCertificatesIn(this.sourceDirectory);
     File truststoreFile = truststoreFactory.saveKeystore(this.outputDirectory, this.finalName, this.password);
 
-    String phase = this.execution.getLifecyclePhase();
 
     Resource resource = new Resource();
     resource.setDirectory(this.outputDirectory.getAbsolutePath());
-    resource.setTargetPath(phase);
     resource.setTargetPath(truststoreFile.getName());
 
+    String phase = this.execution.getLifecyclePhase();
     if ("generate-resources".equals(phase)) {
       this.project.addResource(resource);
     } else if ("generate-test-sources".equals(phase)) {

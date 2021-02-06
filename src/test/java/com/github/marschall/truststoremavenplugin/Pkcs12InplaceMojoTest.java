@@ -1,6 +1,9 @@
 package com.github.marschall.truststoremavenplugin;
 
+import static com.github.marschall.truststoremavenplugin.Pkcs12Assertions.assertOutput;
+
 import java.io.File;
+import java.util.Collections;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -35,9 +38,9 @@ public class Pkcs12InplaceMojoTest {
     MavenExecutionResult result = execution.execute("clean", "package");
     result.assertErrorFreeLog();
 
-    File targetFolder = new File(basedir, "target");
+    File targetFolder = new File(basedir, "target/generated-truststores");
 
-//    this.assertOutput(targetFolder);
+    assertOutput(targetFolder, Collections.singletonList("lencr-org"));
   }
 
 }

@@ -14,6 +14,14 @@
         <groupId>com.github.marschall</groupId>
         <artifactId>truststore-maven-plugin</artifactId>
         <version>${it-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>generate-truststore</id>
+            <goals>
+              <goal>pkcs12-inplace</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
