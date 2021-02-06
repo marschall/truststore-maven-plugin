@@ -51,8 +51,6 @@ mvn package
   'project-truststore-1.0-SNAPSHOT.p12'. The resulting 'p12' file contains the certificate
   files from <<<src/main/certificates>>>>.
 
-  For full documentation, click {{{./plugin-info.html}here}}.
-
 * How to build a truststore in-place
 
   Sometimes you want to build a trustore in-place, eg. for unit tests. In these cases the <<pkcs12-inplace>> goal can be used to generate a truststore.
@@ -80,7 +78,8 @@ mvn package
 </project>
 +----------+
 
-  Per default the turststores are generated in <<target/generated-truststores>>.
+  The turststores are generated in <<target/generated-truststores>>.
 
   If the plugin runs in the <<generate-resources>> the truststore is added to the JAR, if the plugin runs in the <<generate-test-resources>> the truststore is added to the test JAR.
 
+  For full documentation, click {{{./plugin-info.html}here}}.

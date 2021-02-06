@@ -38,6 +38,30 @@ Simply create a project with packaging `pkcs12`
 
 and add your certificates under `src/main/certificates`. The filename minus the extension will be the alias of the certificate.
 
+The plugin can also generate a truststore in-place to `target/generated-truststores` which is added to the projects JAR file.
+
+```xml
+
+<project>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.github.marschall</groupId>
+        <artifactId>truststore-maven-plugin</artifactId>
+        <version>0.3.0</version>
+        <executions>
+          <execution>
+            <id>generate-truststore</id>
+            <goals>
+              <goal>pkcs12-inplace</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+```
 
 For more information check out the generated [plugin page](https://marschall.github.io/truststore-maven-plugin/).
-
