@@ -9,7 +9,6 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecution;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
@@ -49,7 +48,7 @@ public class Pkcs12InplaceMojo extends AbstractMojo {
   @Parameter(defaultValue = "changeit", property = "truststore.password")
   private String password;
 
-  @Component
+  @Parameter( defaultValue = "${mojoExecution}", readonly = true )
   private MojoExecution execution;
 
   @Parameter(defaultValue = "${project}", readonly = true)
