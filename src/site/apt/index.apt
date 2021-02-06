@@ -16,9 +16,9 @@ truststore Maven Plugin
 
    The truststore Plugin has only one goal:
 
-   * {{{./pkcs12-mojo.html}truststore:pkcs12}} creates a PKCS12 truststore from the certificates in the source folder.
+   * {{{./pkcs12-mojo.html}truststore:pkcs12}} creates a PKCS12 truststore aritfact from the certificates in the source folder.
 
-   []
+   * {{{./pkcs12-inplace-mojo.html}truststore:pkcs12-inplace}} creates a PKCS12 truststore from the certificates in the source folder.
 
 * Usage
 
@@ -31,5 +31,3 @@ truststore Maven Plugin
   If you feel like the plugin is missing a feature or has a defect, you can fill a feature request or bug report in our
   {{{https://github.com/marschall/truststore-maven-plugin/issues}issue tracker}} or submit a
   {{{https://github.com/marschall/truststore-maven-plugin/pulls}pull request}}.
-
-   []

@@ -61,12 +61,12 @@ public class Pkcs12InplaceMojo extends AbstractMojo {
 
     TruststoreFactory truststoreFactory = new TruststoreFactory(this.getLog());
     truststoreFactory.addCertificatesIn(this.sourceDirectory);
-    File truststoreFile = truststoreFactory.saveKeystore(this.outputDirectory, this.finalName, this.password);
+    truststoreFactory.saveKeystore(this.outputDirectory, this.finalName, this.password);
 
 
     Resource resource = new Resource();
     resource.setDirectory(this.outputDirectory.getAbsolutePath());
-    resource.setTargetPath(truststoreFile.getName());
+    // TODO should TargetPath be configurable?
 
     String phase = this.execution.getLifecyclePhase();
     if ("generate-resources".equals(phase)) {
