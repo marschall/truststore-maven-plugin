@@ -1,0 +1,1 @@
+openssl x509 -in badssl-com.pem -text -certopt no_pubkey,no_sigdump,no_extensions -out badssl-com.pem
