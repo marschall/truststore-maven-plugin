@@ -33,7 +33,7 @@ public class Pkcs12InplaceMojo extends AbstractMojo {
   /**
    * Directory containing the generated truststore.
    */
-  @Parameter(defaultValue = "${project.build.directory}/generated-truststores", readonly = true)
+  @Parameter(defaultValue = "${project.build.directory}/generated-truststores")
   private File outputDirectory;
 
   /**
