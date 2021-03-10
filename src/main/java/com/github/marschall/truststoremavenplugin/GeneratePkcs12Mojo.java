@@ -18,11 +18,11 @@ import org.apache.maven.project.MavenProject;
  * Runs during a normal Maven build.
  */
 @Mojo(
-  name = "pkcs12-inplace",
+  name = "generate-pkcs12",
   threadSafe = true,
   defaultPhase = GENERATE_RESOURCES
 )
-public class Pkcs12InplaceMojo extends AbstractMojo {
+public class GeneratePkcs12Mojo extends AbstractMojo {
 
   /**
    * The directory in which the certificates to add to the truststore are located.

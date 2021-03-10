@@ -18,7 +18,7 @@
           <execution>
             <id>generate-truststore</id>
             <goals>
-              <goal>pkcs12-inplace</goal>
+              <goal>generate-pkcs12</goal>
             </goals>
           </execution>
         </executions>

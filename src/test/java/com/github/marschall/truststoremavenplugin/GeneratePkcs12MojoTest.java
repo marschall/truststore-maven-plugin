@@ -19,14 +19,14 @@ import io.takari.maven.testing.executor.junit.MavenJUnitTestRunner;
 
 @RunWith(MavenJUnitTestRunner.class)
 @MavenVersions("3.6.3")
-public class Pkcs12InplaceMojoTest {
+public class GeneratePkcs12MojoTest {
 
   @Rule
   public final TestResources resources = new TestResources();
 
   private final MavenRuntime mavenRuntime;
 
-  public Pkcs12InplaceMojoTest(MavenRuntimeBuilder builder) throws Exception {
+  public GeneratePkcs12MojoTest(MavenRuntimeBuilder builder) throws Exception {
     this.mavenRuntime = builder.build();
   }
 

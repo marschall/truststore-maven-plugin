@@ -54,7 +54,7 @@ The plugin can also generate a truststore in-place to `target/generated-truststo
           <execution>
             <id>generate-truststore</id>
             <goals>
-              <goal>pkcs12-inplace</goal>
+              <goal>generate-pkcs12</goal>
             </goals>
           </execution>
         </executions>

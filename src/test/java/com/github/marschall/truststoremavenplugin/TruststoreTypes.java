@@ -2,10 +2,8 @@ package com.github.marschall.truststoremavenplugin;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
-import java.security.KeyStore;
 import java.security.Security;
 import java.util.Arrays;
-import java.util.Enumeration;
 
 public class TruststoreTypes {
 
