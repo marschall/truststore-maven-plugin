@@ -28,7 +28,7 @@ Usage
       <plugin>
         <groupId>com.github.marschall</groupId>
         <artifactId>truststore-maven-plugin</artifactId>
-        <version>0.3.0</version>
+        <version>0.4.0</version>
         <extensions>true</extensions>
       </plugin>
     </plugins>
@@ -53,7 +53,7 @@ mvn package
 
 * How to build a truststore in-place
 
-  Sometimes you want to build a trustore in-place, eg. for unit tests. In these cases the <<pkcs12-inplace>> goal can be used to generate a truststore.
+  Sometimes you want to build a trustore in-place, eg. for unit tests. In these cases the <<generate-pkcs12>> goal can be used to generate a truststore.
 
 +----------+
 <project>
@@ -63,12 +63,12 @@ mvn package
       <plugin>
         <groupId>com.github.marschall</groupId>
         <artifactId>truststore-maven-plugin</artifactId>
-        <version>0.3.0</version>
+        <version>0.4.0</version>
         <executions>
           <execution>
             <id>generate-truststore</id>
             <goals>
-              <goal>pkcs12-inplace</goal>
+              <goal>generate-pkcs12</goal>
             </goals>
           </execution>
         </executions>

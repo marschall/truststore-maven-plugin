@@ -18,7 +18,7 @@ truststore Maven Plugin
 
    * {{{./pkcs12-mojo.html}truststore:pkcs12}} creates a PKCS12 truststore aritfact from the certificates in the source folder.
 
-   * {{{./pkcs12-inplace-mojo.html}truststore:pkcs12-inplace}} creates a PKCS12 truststore from the certificates in the source folder.
+   * {{{./generate-pkcs12-mojo.html}truststore:generate-pkcs12}} creates a PKCS12 truststore from the certificates in the source folder.
 
 * Usage
 
