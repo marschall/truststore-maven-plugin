@@ -36,7 +36,7 @@ Simply create a project with packaging `pkcs12`
 
 ```
 
-and add your certificates under `src/main/certificates`. The filename minus the extension will be the alias of the certificate.
+and add your certificates under `src/main/certificates`. The filename minus the extension will be the alias of the certificate. Certificates can be in either PEM or DER format.
 
 The plugin can also generate a truststore in-place to `target/generated-truststores` which is added to the projects JAR file.
 
