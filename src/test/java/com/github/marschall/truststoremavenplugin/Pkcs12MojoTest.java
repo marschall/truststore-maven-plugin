@@ -3,7 +3,7 @@ package com.github.marschall.truststoremavenplugin;
 import static com.github.marschall.truststoremavenplugin.Pkcs12Assertions.assertOutput;
 
 import java.io.File;
-import java.util.Collections;
+import java.util.Arrays;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -40,7 +40,7 @@ public class Pkcs12MojoTest {
 
     File targetFolder = new File(basedir, "target");
 
-    assertOutput(targetFolder, Collections.singletonList("DigiCertHighAssuranceEVRootCA"));
+    assertOutput(targetFolder, Arrays.asList("DigiCertHighAssuranceEVRootCA", "isrg-root-x1"));
   }
 
   @Test
