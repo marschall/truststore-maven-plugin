@@ -31,14 +31,13 @@
     </component>
     <component>
       <role>org.apache.maven.artifact.handler.ArtifactHandler</role>
-      <role-hint>p12</role-hint>
+      <role-hint>pkcs12</role-hint>
       <implementation>
         org.apache.maven.artifact.handler.DefaultArtifactHandler
       </implementation>
       <configuration>
         <type>truststore</type>
         <extension>p12</extension>
-        <packaging>pkcs12</packaging>
         <addedToClasspath>false</addedToClasspath>
       </configuration>
     </component>
