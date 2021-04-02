@@ -22,7 +22,7 @@
       <id>marschall</id>
       <name>Philippe Marschall</name>
       <email>philippe.marschall@gmail.com</email>
-      <timezone>Europe/Paris</timezone>
+      <timezone>Europe/Zurich</timezone>
       <url>https://github.com/marschall</url>
     </developer>
   </developers>
@@ -320,7 +320,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>3.0.0</version>
+        <version>3.1.1</version>
         <reportSets>
           <reportSet>
             <reports>
