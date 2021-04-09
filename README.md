@@ -65,3 +65,6 @@ The plugin can also generate a truststore in-place to `target/generated-truststo
 ```
 
 For more information check out the generated [plugin page](https://marschall.github.io/truststore-maven-plugin/).
+
+Similar plugins are [kaazing/truststore-maven-plugin](https://github.com/kaazing/truststore-maven-plugin) which creates a truststore using trusted sources from Mozilla and Chrome and [automatictester/truststore-maven-plugin](https://github.com/automatictester/truststore-maven-plugin) which is similar but can also download certificates or extract them from existing truststores.
+
