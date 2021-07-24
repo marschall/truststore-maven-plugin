@@ -9,9 +9,11 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecution;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
+import org.sonatype.plexus.build.incremental.BuildContext;
 
 /**
  * Generates a PKCS12 truststore from a collection of certificates located in a folder.
@@ -54,14 +56,20 @@ public class GeneratePkcs12Mojo extends AbstractMojo {
   @Parameter(defaultValue = "${project}", readonly = true)
   private MavenProject project;
 
+  @Component
+  private BuildContext buildContext;
+
   @Override
   public void execute() throws MojoExecutionException, MojoFailureException {
     this.validate();
 
-    TruststoreFactory truststoreFactory = new TruststoreFactory(this.getLog());
+    if (!this.buildContext.hasDelta(this.outputDirectory)) {
+      return;
+    }
+
+    TruststoreFactory truststoreFactory = new TruststoreFactory(this.getLog(), this.buildContext);
     truststoreFactory.addCertificatesIn(this.sourceDirectory);
     truststoreFactory.saveKeystore(this.outputDirectory, this.finalName, this.password);
-
 
     Resource resource = new Resource();
     resource.setDirectory(this.outputDirectory.getAbsolutePath());
@@ -79,10 +87,10 @@ public class GeneratePkcs12Mojo extends AbstractMojo {
 
   private void validate() throws MojoFailureException {
     if (!this.sourceDirectory.exists()) {
-      throw new MojoFailureException("certificate directory: " + this.sourceDirectory + " does not exist");
+      this.buildContext.addMessage(this.sourceDirectory, 0, 0, "certificate directory: " + this.sourceDirectory + " does not exist", BuildContext.SEVERITY_ERROR, null);
     }
     if (!this.sourceDirectory.isDirectory()) {
-      throw new MojoFailureException("certificate directory: " + this.sourceDirectory + " is not a directory");
+      this.buildContext.addMessage(this.sourceDirectory, 0, 0, "certificate directory: " + this.sourceDirectory + " is not a directory", BuildContext.SEVERITY_ERROR, null);
     }
   }
 

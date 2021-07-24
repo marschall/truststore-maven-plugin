@@ -4,8 +4,8 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.security.GeneralSecurityException;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
@@ -19,22 +19,29 @@ import java.security.cert.X509Certificate;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.logging.Log;
+import org.sonatype.plexus.build.incremental.BuildContext;
 
 final class TruststoreFactory {
 
   private final KeyStore keyStore;
   private final CertificateFactory certificateFactory;
   private final Log log;
+  private final BuildContext buildContext;
 
-  TruststoreFactory(Log log) throws MojoExecutionException, MojoFailureException {
+  TruststoreFactory(Log log, BuildContext buildContext) throws MojoExecutionException, MojoFailureException {
     this.log = log;
+    this.buildContext = buildContext;
     this.keyStore = this.newEmptyKeystore();
     this.certificateFactory = this.newCertificateFactory();
   }
 
   void addCertificatesIn(File directory) throws MojoExecutionException, MojoFailureException {
     boolean empty = true;
-    for (File certificateFile : directory.listFiles()) {
+    File[] certificateFiles = directory.listFiles();
+    if (certificateFiles == null) {
+      throw new MojoExecutionException("Could not list directory:" + directory);
+    }
+    for (File certificateFile : certificateFiles) {
       if (certificateFile.isDirectory()) {
         this.log.warn("skipping directory: " + certificateFile);
         continue;
@@ -108,7 +115,7 @@ final class TruststoreFactory {
     if (this.log.isDebugEnabled()) {
       this.log.debug("saving keystore to: " + keyStoreFile);
     }
-    try (FileOutputStream fileOutputstream = new FileOutputStream(keyStoreFile);
+    try (OutputStream fileOutputstream = this.buildContext.newFileOutputStream(keyStoreFile);
          BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputstream)) {
       this.keyStore.store(bufferedOutputStream, password != null ? password.toCharArray() : null);
     } catch (IOException | GeneralSecurityException e) {
