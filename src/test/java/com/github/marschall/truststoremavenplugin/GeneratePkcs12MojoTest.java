@@ -18,7 +18,7 @@ import io.takari.maven.testing.executor.MavenVersions;
 import io.takari.maven.testing.executor.junit.MavenJUnitTestRunner;
 
 @RunWith(MavenJUnitTestRunner.class)
-@MavenVersions("3.8.1")
+@MavenVersions("3.8.4")
 public class GeneratePkcs12MojoTest {
 
   @Rule
@@ -27,7 +27,9 @@ public class GeneratePkcs12MojoTest {
   private final MavenRuntime mavenRuntime;
 
   public GeneratePkcs12MojoTest(MavenRuntimeBuilder builder) throws Exception {
-    this.mavenRuntime = builder.build();
+    this.mavenRuntime = builder
+            .withCliOptions("--batch-mode")
+            .build();
   }
 
   @Test
