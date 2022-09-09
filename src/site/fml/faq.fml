@@ -24,15 +24,19 @@
       <question>What is the default truststore password?</question>
       <answer>
         <p>
-          The default truststore password is "changeit" (without the quotes).
+          There is no default truststore password.
         </p>
       </answer>
     </faq>
-    <faq id="why-password">
-      <question>Why is a password required?</question>
+    <faq id="password-required">
+      <question>Is a password required?</question>
       <answer>
         <p>
-          Most tools expect a truststore password.
+          A password is not required but most tools expect a truststore password.
+          Generating a truststore without a password is supported
+          out of the box on <a href="https://bugs.openjdk.org/browse/JDK-8274862" title="Allow store password to be null when saving a PKCS12 KeyStore">JDK 18+</a>
+          and requires the following system properties on earlier versions
+          <pre><code>-Dkeystore.pkcs12.certProtectionAlgorithm=NONE -Dkeystore.pkcs12.macAlgorithm=NONE</code></pre>
         </p>
       </answer>
     </faq>

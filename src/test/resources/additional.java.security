@@ -1,0 +1,2 @@
+keystore.pkcs12.certProtectionAlgorithm=NONE
+keystore.pkcs12.macAlgorithm=NONE

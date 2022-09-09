@@ -4,8 +4,9 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.github.marschall.unit</groupId>
-  <artifactId>project-to-test</artifactId>
+  <artifactId>no-password</artifactId>
   <version>1.0-SNAPSHOT</version>
+  <packaging>pkcs12</packaging>
   <name>Test TruststoreMojo</name>
 
   <build>
@@ -14,17 +15,7 @@
         <groupId>com.github.marschall</groupId>
         <artifactId>truststore-maven-plugin</artifactId>
         <version>${it-plugin.version}</version>
-        <executions>
-          <execution>
-            <id>generate-truststore</id>
-            <goals>
-              <goal>generate-pkcs12</goal>
-            </goals>
-            <configuration>
-              <password>changeit</password>
-            </configuration>
-          </execution>
-        </executions>
+        <extensions>true</extensions>
       </plugin>
     </plugins>
   </build>

@@ -1,6 +1,7 @@
 package com.github.marschall.truststoremavenplugin;
 
 import static com.github.marschall.truststoremavenplugin.Pkcs12Assertions.assertOutput;
+import static com.github.marschall.truststoremavenplugin.Pkcs12Assertions.assertOutputNoPassword;
 
 import java.io.File;
 import java.util.Arrays;
@@ -18,7 +19,7 @@ import io.takari.maven.testing.executor.MavenVersions;
 import io.takari.maven.testing.executor.junit.MavenJUnitTestRunner;
 
 @RunWith(MavenJUnitTestRunner.class)
-@MavenVersions("3.8.4")
+@MavenVersions("3.8.6")
 public class Pkcs12MojoTest {
 
   @Rule
@@ -53,6 +54,19 @@ public class Pkcs12MojoTest {
     MavenExecutionResult result = execution.execute("clean", "package");
     result.assertLogText("Expired certificate badssl-com.pem");
     result.assertLogText("BUILD FAILURE");
+  }
+
+  @Test
+  public void testNoPassword() throws Exception {
+    File basedir = this.resources.getBasedir("no-password");
+    MavenExecution execution = this.mavenRuntime.forProject(basedir);
+
+    MavenExecutionResult result = execution.execute("clean", "package");
+    result.assertErrorFreeLog();
+
+    File targetFolder = new File(basedir, "target");
+
+    assertOutputNoPassword(targetFolder, Arrays.asList("DigiCertHighAssuranceEVRootCA", "isrg-root-x1"));
   }
 
 }

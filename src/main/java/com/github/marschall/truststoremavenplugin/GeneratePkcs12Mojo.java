@@ -46,8 +46,13 @@ public class GeneratePkcs12Mojo extends AbstractMojo {
 
   /**
    * The password to generate the truststore integrity check.
+   * <p>
+   * The password is optional and can be left out. This is supported
+   * out of the box on JDK 18+ and requires the following system
+   * properties on earlier versions
+   * <pre><code>-Dkeystore.pkcs12.certProtectionAlgorithm=NONE -Dkeystore.pkcs12.macAlgorithm=NONE</code></pre>
    */
-  @Parameter(defaultValue = "changeit", property = "truststore.password")
+  @Parameter(property = "truststore.password")
   private String password;
 
   @Parameter( defaultValue = "${mojoExecution}", readonly = true )

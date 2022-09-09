@@ -16,6 +16,9 @@
         <artifactId>truststore-maven-plugin</artifactId>
         <version>${it-plugin.version}</version>
         <extensions>true</extensions>
+        <configuration>
+          <password>changeit</password>
+        </configuration>
       </plugin>
     </plugins>
   </build>

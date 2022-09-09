@@ -64,7 +64,22 @@ The plugin can also generate a truststore in-place to `target/generated-truststo
 </project>
 ```
 
+Documentation
+-------------
+
 For more information check out the generated [plugin page](https://marschall.github.io/truststore-maven-plugin/).
+
+Passwordless Truststores
+------------------------
+
+Since [JDK 18](https://bugs.openjdk.org/browse/JDK-8274862) passwordless truststores are supported out of the box. [Earlier versions](https://bugs.openjdk.org/browse/JDK-8076190) need the following two system properties
+
+```
+-Dkeystore.pkcs12.certProtectionAlgorithm=NONE -Dkeystore.pkcs12.macAlgorithm=NONE
+```
+
+Similar Plugins
+---------------
 
 Similar plugins are [kaazing/truststore-maven-plugin](https://github.com/kaazing/truststore-maven-plugin) which creates a truststore using trusted sources from Mozilla and Chrome and [automatictester/truststore-maven-plugin](https://github.com/automatictester/truststore-maven-plugin) which is similar but can also download certificates or extract them from existing truststores.
 
