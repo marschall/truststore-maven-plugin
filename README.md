@@ -27,8 +27,11 @@ Simply create a project with packaging `pkcs12`
       <plugin>
         <groupId>com.github.marschall</groupId>
         <artifactId>truststore-maven-plugin</artifactId>
-        <version>0.5.0</version>
+        <version>0.6.0</version>
         <extensions>true</extensions>
+        <configuration>
+          <password>changeit</password>
+        </configuration>
       </plugin>
     </plugins>
   </build>
@@ -49,13 +52,16 @@ The plugin can also generate a truststore in-place to `target/generated-truststo
       <plugin>
         <groupId>com.github.marschall</groupId>
         <artifactId>truststore-maven-plugin</artifactId>
-        <version>0.4.0</version>
+        <version>0.6.0</version>
         <executions>
           <execution>
             <id>generate-truststore</id>
             <goals>
               <goal>generate-pkcs12</goal>
             </goals>
+            <configuration>
+              <password>changeit</password>
+            </configuration>
           </execution>
         </executions>
       </plugin>
