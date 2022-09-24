@@ -68,7 +68,7 @@ public class GeneratePkcs12Mojo extends AbstractMojo {
   public void execute() throws MojoExecutionException, MojoFailureException {
     this.validate();
 
-    if (!this.buildContext.hasDelta(this.outputDirectory)) {
+    if (!this.buildContext.hasDelta(this.sourceDirectory)) {
       return;
     }
 
