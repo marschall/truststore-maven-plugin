@@ -19,7 +19,7 @@ import io.takari.maven.testing.executor.MavenVersions;
 import io.takari.maven.testing.executor.junit.MavenJUnitTestRunner;
 
 @RunWith(MavenJUnitTestRunner.class)
-@MavenVersions("3.8.6")
+@MavenVersions("3.9.0")
 public class Pkcs12MojoTest {
 
   @Rule
