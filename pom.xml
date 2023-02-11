@@ -78,9 +78,9 @@
     </dependency>
 
      <dependency>
-       <groupId>org.sonatype.plexus</groupId>
+       <groupId>org.codehaus.plexus</groupId>
        <artifactId>plexus-build-api</artifactId>
-       <version>0.0.7</version>
+       <version>1.0.0</version>
      </dependency>
 
     <dependency>
@@ -162,11 +162,11 @@
         <artifactId>maven-javadoc-plugin</artifactId>
         <configuration>
           <links>
-            <link>http://docs.oracle.com/javase/8/docs/api/</link>
-            <link>http://maven.apache.org/ref/${maven.version}/maven-plugin-api/apidocs/</link>
-            <link>http://maven.apache.org/ref/${maven.version}/maven-artifact/apidocs/</link>
-            <link>http://maven.apache.org/ref/${maven.version}/maven-model/apidocs/</link>
-            <link>http://maven.apache.org/ref/${maven.version}/maven-core/apidocs/</link>
+            <link>https://docs.oracle.com/javase/8/docs/api/</link>
+            <link>https://maven.apache.org/ref/${maven.version}/maven-plugin-api/apidocs/</link>
+            <link>https://maven.apache.org/ref/${maven.version}/maven-artifact/apidocs/</link>
+            <link>https://maven.apache.org/ref/${maven.version}/maven-model/apidocs/</link>
+            <link>https://maven.apache.org/ref/${maven.version}/maven-core/apidocs/</link>
           </links>
         </configuration>
         <executions>
@@ -239,7 +239,7 @@
         </plugin>
         <plugin>
           <artifactId>maven-deploy-plugin</artifactId>
-          <version>3.0.0</version>
+          <version>3.1.0</version>
         </plugin>
         <plugin>
           <artifactId>maven-gpg-plugin</artifactId>
@@ -247,7 +247,7 @@
         </plugin>
         <plugin>
           <artifactId>maven-install-plugin</artifactId>
-          <version>3.0.1</version>
+          <version>3.1.0</version>
         </plugin>
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
@@ -263,11 +263,11 @@
         </plugin>
         <plugin>
           <artifactId>maven-project-info-reports-plugin</artifactId>
-          <version>3.4.1</version>
+          <version>3.4.2</version>
         </plugin>
         <plugin>
           <artifactId>maven-release-plugin</artifactId>
-          <version>2.5.3</version>
+          <version>3.0.0-M7</version>
         </plugin>
         <plugin>
           <artifactId>maven-resources-plugin</artifactId>
@@ -296,7 +296,7 @@
         <plugin>
           <groupId>io.takari.maven.plugins</groupId>
           <artifactId>takari-lifecycle-plugin</artifactId>
-          <version>2.0.9</version>
+          <version>2.1.0</version>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -373,6 +373,7 @@
     <maven.plugin.version>3.7.1</maven.plugin.version>
     <java.version>1.8</java.version>
     <tikari.version>3.0.1</tikari.version>
+    <project.build.outputTimestamp>2023-01-01T00:00:00Z</project.build.outputTimestamp>
   </properties>
 
 </project>
